@@ -131,7 +131,7 @@ class Grosh(QtWidgets.QMainWindow):
         self.ui.tableWidget.setRowCount(len(self.lis_img))
         self.ui.tableWidget.setHorizontalHeaderLabels(["Зображення продукту"])
 
-        os.chdir(os.getcwd()+r'\Grosh_foto')
+        os.chdir(os.getcwd()+ r'\Grosh_foto')
 
         for k in self.lis_img:
             if self.i < len(self.lis_img):
@@ -146,6 +146,7 @@ class Grosh(QtWidgets.QMainWindow):
                 break
         num = 0
         for i in range(len(self.lis_img)):
+            self.label = QtWidgets.QLabel()
             pixmap = QtGui.QPixmap(os.getcwd() + '/{}.jpg'.format(i))
             self.label.setPixmap(pixmap)
             self.label.setScaledContents(True)
@@ -168,7 +169,7 @@ class Furshet(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         """Получаем страницу"""
         super(Furshet, self).__init__(parent)
-        self.label = QtWidgets.QLabel()
+
         self.url = 'https://furshet.ua/actions?page=%s'
         self.lis_img = []
         self.urls = []
@@ -252,6 +253,7 @@ class Furshet(QtWidgets.QMainWindow):
             self.ui.tableWidget.setItem(n, 3, item)
             n += 1
         os.chdir(os.getcwd()+'/Furshet_foto')
+
         for k in self.lis_img:
             if self.i < len(self.lis_img):
                 filename = '{}.png'.format(self.i)
@@ -265,6 +267,7 @@ class Furshet(QtWidgets.QMainWindow):
                 break
         num = 0
         for i in range(len(self.lis_img)):
+            self.label = QtWidgets.QLabel()
             pixmap = QtGui.QPixmap(os.getcwd() + '/{}.png'.format(i))
             self.label.setPixmap(pixmap)
             self.label.setScaledContents(True)
@@ -286,7 +289,7 @@ class Atb(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         """Получаем страницу"""
         super(Atb, self).__init__(parent)
-        self.label = QtWidgets.QLabel()
+
         self.ui = uic.loadUi('таблиця.ui')
         self.ui.setWindowIcon(QtGui.QIcon('атб.png'))
         self.ui.setWindowTitle('АТБ')
@@ -301,8 +304,8 @@ class Atb(QtWidgets.QMainWindow):
         self.price_list = []
         self.old_list = []
         self.i = 0
-        self.parse()
         self.ui.show()
+        self.parse()
 
     def parse(self):
         self.url = 'https://www.atbmarket.com/hot/akcii/economy/'
@@ -369,7 +372,8 @@ class Atb(QtWidgets.QMainWindow):
             self.ui.tableWidget.setItem(n, 3, item)
             n += 1
         # .setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
-        os.chdir(os.getcwd() + r'\Atb_foto')
+        os.chdir(os.getcwd() + r'/Atb_foto')
+        print(os.getcwd())
 
         for k in self.lis_img:
             if self.i < len(self.lis_img):
@@ -384,7 +388,8 @@ class Atb(QtWidgets.QMainWindow):
                 break
         num = 0
         for i in range(len(self.lis_img)):
-            pixmap = QtGui.QPixmap(os.getcwd() + '/{}.jpg'.format(i))
+            self.label = QtWidgets.QLabel()
+            pixmap = QtGui.QPixmap(os.getcwd() + r'/{}.jpg'.format(i))
             self.label.setPixmap(pixmap)
             self.label.setScaledContents(True)
             self.label.setSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
@@ -393,6 +398,7 @@ class Atb(QtWidgets.QMainWindow):
             self.ui.tableWidget.setCellWidget(int(i), 0, self.label)
             num += 1
         os.chdir(os.path.split(os.getcwd())[0])
+
 
     def click_1(self):
         MainWindow(self)
@@ -403,6 +409,7 @@ class Atb(QtWidgets.QMainWindow):
 
 def createFolder():
     path = os.getcwd()
+    print(path)
     folder_name = ['Grosh_foto', 'Furshet_foto', 'Atb_foto']
     for i in folder_name:
         fullpath = os.path.join(path, i)
